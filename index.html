@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+
+
+</head>
+
+<body>
+
+    <nav>
+        <header class="my-5">
+            <h1 class="text-xl md:text-3xl font-bold text-center text-purple-600">Explore the surprising WORLD!</h1>
+        </header>
+    </nav>
+
+    <main>
+        <section class="my-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-5 text-center w-full lg:w-1/2 mx-auto">
+                <div class="dropdown region-list">
+                    <div tabindex="0" role="button" class="btn m-1">Filter as Region <span id="filter_by_region"></span>
+                    </div>
+                    <ul id="region_box" tabindex="0"
+                        class="dropdown-content menu max-h-[400px] flex-nowrap overflow-y-scroll bg-white text-gray-900 text-lg font-semibold rounded-box z-[1] p-2 shadow">
+
+                    </ul>
+                </div>
+                <div class="dropdown capital-list">
+                    <div tabindex="0" role="button" class="btn m-1">Filter as Capital <span
+                            id="filter_by_capital"></span></div>
+                    <ul id="capital_box" tabindex="0"
+                        class="dropdown-content menu max-h-[400px] flex-nowrap overflow-y-scroll bg-white text-gray-900 text-lg font-semibold rounded-box z-[1] p-2 shadow">
+
+                    </ul>
+                </div>
+                <div class="dropdown language-list">
+                    <div tabindex="0" role="button" class="btn m-1">Filter as Language <span
+                            id="filter_by_language"></span></div>
+                    <ul id="language_box" tabindex="0"
+                        class="dropdown-content menu max-h-[400px] flex-nowrap overflow-y-scroll bg-white text-gray-900 text-lg font-semibold rounded-box z-[1] p-2 shadow">
+
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Spinner -->
+        <section>
+            <div id="spinner" class="hidden fixed inset-0 flex items-center justify-center bg-[#000000b5] z-50">
+                <div class="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-blue-500"></div>
+            </div>
+
+        </section>
+
+        <!-- Countries will entry here -->
+        <section id="countries_container"
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 w-11/12 mx-auto my-5">
+
+        </section>
+    </main>
+
+    <script src="./js/script.js"></script>
+    <script src="./js/dropdown.js"></script>
+</body>
+
+</html>
