@@ -108,7 +108,7 @@ const checkScroll = () => {
     const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
     console.log(scrollTop);
     if (
-      scrollTop + clientHeight >= scrollHeight - 5 &&
+      scrollTop + clientHeight >= scrollHeight - 20 &&
       curentIndex < countriesData.length
     ) {
       displayCountries();
