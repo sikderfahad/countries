@@ -62,6 +62,30 @@
             class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 w-11/12 mx-auto my-5">
 
         </section>
+
+        <!-- Modal -->
+        <section>
+            <dialog id="country_modal" class="modal">
+                <div class="modal-box">
+                    <div class="flex items-center justify-between">
+                        <h3 id="country_name" class="text-2xl font-bold"></h3>
+                        <span id="timezone"></span>
+                    </div>
+                    <div class="w-full text-center  my-6">
+                        <img class="rounded-lg block mx-auto" id="country_img" src="" alt="">
+                    </div>
+                    <div class="">
+                        <p>Area: <span id="country_area"></span> Km<sup>2</sup></p>
+                        <p>Population: <span id="country_population"></span></p>
+                        <p>Capital: <span id="country_capital"></span></p>
+                        <p>Language: <span id="country_lang"></span></p>
+                    </div>
+                </div>
+                <form method="dialog" class="modal-backdrop">
+                    <button>close</button>
+                </form>
+            </dialog>
+        </section>
     </main>
 
     <script src="./js/script.js"></script>

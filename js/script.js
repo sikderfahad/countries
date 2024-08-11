@@ -13,9 +13,11 @@ const loadCountries = async () => {
     const res = await fetch(url);
     if (!res.ok) throw new Error("Network response was not ok");
     const data = await res.json();
+    console.log(data);
     countriesData = data;
     displayCountries();
     storeRegion();
+    1;
   } catch (err) {
     console.error("Failed to load countries data:", err);
   } finally {
@@ -68,7 +70,7 @@ const displayCountries = () => {
   );
   curentIndex += itemsPerPage;
   nextCountries.forEach((country) => {
-    const { flags, name, capital, area, region } = country;
+    const { flags, name, cca2, capital, area, region } = country;
     const newCountry = document.createElement("div");
     newCountry.classList.add(
       "p-4",
@@ -92,7 +94,7 @@ const displayCountries = () => {
                 <p>Capital: ${capital}</p>
                 <p>Region: ${region}</p>
                 <div class="card-actions justify-end">
-                    <button class="btn btn-primary text-white">Queries</button>
+                    <button onclick="handledModal('${cca2}')" class="btn btn-primary text-white">Queries</button>
                 </div>
             </div>
         </div>
@@ -101,14 +103,51 @@ const displayCountries = () => {
   });
 };
 
+const handledModal = async (code) => {
+  console.log(code);
+  try {
+    document.getElementById("spinner").style.display = "flex";
+    const url = `https://restcountries.com/v3.1/alpha/${code}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    displayDataInModal(data[0]);
+  } catch (err) {
+    console.log(err);
+  } finally {
+    document.getElementById("spinner").style.display = "none";
+  }
+};
+
+const displayDataInModal = (country) => {
+  console.log(country);
+  const { area, capital, name, flags, population, languages, timezones } =
+    country;
+  setInnerText("country_area", area);
+  setInnerText("country_capital", capital);
+  setInnerText("country_name", name?.common);
+  document.getElementById("country_img").setAttribute("src", flags?.png);
+  setInnerText("country_population", population);
+  setInnerText("timezone", timezones?.[0]);
+
+  languages &&
+    Object.values(languages).forEach((lang) =>
+      setInnerText("country_lang", lang)
+    );
+  const modalBody = document.getElementById("country_modal");
+  modalBody.showModal();
+};
+
+const setInnerText = (textId, value) => {
+  document.getElementById(textId).innerText = value;
+};
+
 let debounceTimer;
 const checkScroll = () => {
   clearTimeout(debounceTimer);
   debounceTimer = setTimeout(() => {
     const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
-    console.log(scrollTop);
     if (
-      scrollTop + clientHeight >= scrollHeight - 20 &&
+      scrollTop + clientHeight >= scrollHeight - 200 &&
       curentIndex < countriesData.length
     ) {
       displayCountries();
